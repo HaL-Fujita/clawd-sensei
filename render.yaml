@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: clawd-sensei
+    runtime: docker
+    plan: starter
+    healthCheckPath: /
+    disk:
+      name: clawdbot-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: CLAWDBOT_GATEWAY_TOKEN
+        generateValue: true
+      - key: CLAWDBOT_STATE_DIR
+        value: /data
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=1536"
